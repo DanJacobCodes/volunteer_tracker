@@ -4,7 +4,7 @@ describe(Project) do
   describe("#initialize") do
     it("is initialized with project_name and id") do
       project1 = Project.new({:project_name => project_name, :id => nil})
-      expect(project1.title()).to(eq("Stuff"))
+      expect(project1.project()).to(eq("Stuff"))
     end
   end
 
@@ -25,7 +25,7 @@ describe(Project) do
   end
 
   describe("#==") do
-    it("is the same project if it has the id, title and author") do
+    it("is the same project if it has the id, project and author") do
       project1 = Project.new({:project_name => project_name, :id => nil})
       project2 = Project.new({:project_name => project_name, :id => nil})
       expect(project1).to(eq(project2))
@@ -42,7 +42,7 @@ describe(Project) do
   end
 
   describe("#delete") do
-    it("lets you delete an project from the database") do
+    it("lets you delete a project from the database") do
       project1 = Project.new({:project_name => project_name, :id => nil})
       project1.save()
       project2 = Project.new({:project_name => project_name, :id => nil})
