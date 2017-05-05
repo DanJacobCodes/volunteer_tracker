@@ -12,7 +12,7 @@ class Project
     projects_in_database.each() do |project|
       name = project.fetch('project_name')
       id = project.fetch('id').to_i()
-      each_project = Patron.new({:project_name => project_name, :id => id})
+      each_project = Project.new({:project_name => project_name, :id => id})
       all_projects.push(each_project)
     end
     all_projects
@@ -28,7 +28,7 @@ class Project
   end
 
   def save
-    result = DB.exec("INSERT INTO projects (projects_name) VALUES ('#{@project_name}') RETURNING id;")
+    result = DB.exec("INSERT INTO projects (project_name) VALUES ('#{@project_name}') RETURNING id;")
     @id = result.first().fetch("id").to_i()
   end
 
