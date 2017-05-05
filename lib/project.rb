@@ -1,31 +1,34 @@
 class Project
+  attr_accessor(:project_name, :id)
 
-  attr_accessor(:projects, :id)
+  def initialize(attributes)
+    @project_name = attributes.fetch(:project_name)
+    @id = attributes.fetch(:id)
+  end
 
-def initialize(attributes)
-  @projects = attributes.fetch(:projects)
-  @id = attributes.fetch(:id)
-end
-
-def self.all
-  projects_in_database = DB.exec("SELECT * FROM projects;")
-  all_projects = []
+  def self.all
+    projects_in_database = DB.exec("SELECT * FROM projects;")
+    all_projects = []
     projects_in_database.each() do |project|
-      projects = project.fetch('project')
+      name = project.fetch('project_name')
       id = project.fetch('id').to_i()
-      each_project = Project.new({:projects => projects, :id => id})
+      each_project = Patron.new({:project_name => name, :id => id})
       all_projects.push(each_project)
     end
     all_projects
   end
 
+
   def save
-    result = DB.exec("INSERT INTO volunteers (projects) VALUES ('#{@projects}') RETURNING id;")
+    result = DB.exec("INSERT INTO projects (project_name) VALUES ('#{@project_name}') RETURNING id;")
     @id = result.first().fetch("id").to_i()
   end
 
+
+
   def ==(another_project)
-    (self.projects() == another_project.projects())
+    (self.project_name() == another_project.project_name()) && (self.id() == another_project.id())
+  end
 
 
   def self.find(id)
@@ -37,5 +40,15 @@ def self.all
     end
     found_project
   end
-end
+
+  def update(attributes)
+    @project_name = attributes.fetch(:project_name)
+    @id = self.id()
+    DB.exec("UPDATE projects SET project_name = '#{@project_name}' WHERE id = #{@id};")
+    end
+  end
+
+  def delete
+    DB.exec("DELETE FROM patrons WHERE id = #{self.id};")
+  end
 end
