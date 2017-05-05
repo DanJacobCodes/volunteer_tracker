@@ -9,7 +9,7 @@ class Volunteer
   end
 
   def self.all
-    volunteers_database = DB.exec("SELECT * FROM volunteers;")
+    volunteers_in_database = DB.exec("SELECT * FROM volunteers;")
     all_volunteers = []
     volunteers_in_database.each() do |volunteer|
       first_name = volunteer.fetch('first_name')
@@ -23,7 +23,7 @@ class Volunteer
   end
 
   def save
-    result = DB.exec("INSERT INTO volunteers (first_name, last_name, project_id,) VALUES ('#{@first_name}', '#{@last_name}') RETURNING id;")
+    result = DB.exec("INSERT INTO volunteers (first_name, last_name) VALUES ('#{@first_name}', '#{@last_name}') RETURNING id;")
     @id = result.first().fetch("id").to_i()
   end
 
@@ -37,10 +37,9 @@ class Volunteer
   def self.find(id)
     found_volunteer = nil
     Volunteer.all().each() do |volunteer|
-      if volunteer.id() == id
+      if volunteer.id(). == (id)
         found_volunteer = volunteer
       end
-    end
     found_volunteer
   end
 
@@ -56,4 +55,4 @@ class Volunteer
    DB.exec("DELETE FROM volunteers WHERE id = #{self.id()};")
    end
  end
-end
+ end
