@@ -23,6 +23,15 @@ describe(Project) do
     end
   end
 
+  describe("#save") do
+    it("adds a project to the array of saved projects") do
+      test_project = Project.new({:projects => "Disaster Relief", :id => nil})
+      test_project.save()
+      expect(Project.all()).to(eq([test_project]))
+    end
+  end
+
+
   describe("#==") do
     it("is the same project if it has the id, projects and author") do
       project1 = Project.new({:projects => "Disaster Relief", :id => nil})

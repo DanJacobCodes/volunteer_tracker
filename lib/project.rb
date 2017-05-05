@@ -20,11 +20,9 @@ def self.all
   end
 
   def save
-    result = DB.exec("INSERT INTO projects (projects) VALUES ('#{@projects}') RETURNING id;")
+    result = DB.exec("INSERT INTO volunteers (projects) VALUES ('#{@projects}') RETURNING id;")
     @id = result.first().fetch("id").to_i()
   end
-
-
 
   def ==(another_project)
     (self.projects() == another_project.projects())
