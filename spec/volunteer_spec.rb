@@ -3,7 +3,7 @@ require('spec_helper')
 describe(Volunteer) do
   describe("#initialize") do
     it("is initialized with volunteer attributes") do
-    volunteer1 =  Volunteer.new({:first_name => "Dan", :last_name => "Jacob", :project_id => nil, :id => nil})
+    volunteer1 =  Volunteer.new({:first_name => "Dan", :last_name => "Jacob", :project_id => 1, :id => nil})
     expect(volunteer1.first_name()).to(eq("Dan"))
   end
 end
@@ -18,9 +18,7 @@ describe(".find") do
   it("returns a volunteer by its ID") do
     test_volunteer =  Volunteer.new({:first_name => "Dan", :last_name => "Jacob", :project_id => nil, :id => nil})
     test_volunteer.save()
-    test_volunteer2 = Volunteer.new({:first_name => "Dan", :last_name => "Jacob", :project_id => nil, :id => nil})
-    test_volunteer2.save()
-    expect(Volunteer.find(test_volunteer2.id())).to(eq(test_volunteer2))
+    expect(Volunteer.find(test_volunteer1.id)).to(eq(test_volunteer1))
   end
 end
 

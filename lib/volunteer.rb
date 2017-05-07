@@ -14,19 +14,19 @@ class Volunteer
     volunteers_in_database.each() do |volunteer|
       first_name = volunteer.fetch('first_name')
       last_name = volunteer.fetch('last_name')
-      project_id = volunteer.fetch('project_id')
+      project_id = volunteer.fetch('project_id').to_i()
       id = volunteer.fetch('id').to_i()
-      each_volunteer = Volunteer.new({:first_name => first_name, :last_name => last_name, :project_id => project_id, :id => id})
+      each_volunteer = Volunteer.new({:id => id, :first_name => first_name, :last_name => last_name, :project_id => project_id})
       all_volunteers.push(each_volunteer)
     end
     all_volunteers
   end
 
   def save
-    result = DB.exec("INSERT INTO volunteers (first_name,last_name, project_id) VALUES ('#{@first_name}', '#{@last_name}', #{@project_id}) RETURNING id;")
-      @id = result.first().fetch('id').to_i()
-      @project_id = result.first('project_id').to_i()
+    result = DB.exec("INSERT INTO volunteers (first_name, last_name, project_id) VALUES ('#{@first_name}', '#{@last_name}', #{@project_id}) RETURNING id;")
+      @id = result.first().fetch("id").to_i()
   end
+
 
 
 
@@ -60,7 +60,6 @@ class Volunteer
     project_id = self.project_id
     result = DB.exec("SELECT * FROM projects WHERE id = #{project_id};")
     name = result.first().fetch('name')
+     end
    end
-
- end
  end

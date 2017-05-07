@@ -1,0 +1,11 @@
+<h1>Volunteer Details</h1>
+
+<p>
+  First Name: <%=@volunteer.first_name()  %>
+  <br>
+  Last Name: <%= @volunteer.last_name() %>
+</p>
+
+<a href="/volunteers/<%= @volunteer.id() %>/edit">Edit Volunteer Info</a>
+
+<!-- #Form for individual volunteer# -->

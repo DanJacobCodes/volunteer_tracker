@@ -1,0 +1,18 @@
+<hr>
+<% if @volunteers.any?() %>
+  <h1>Meet our volunteer!</h1>
+
+  <ul>
+    <% @volunteers.each() do |volunteer| %>
+      <li><a href="/volunteer/<%= volunteer.id()%>">First Name: <%= volunteer.title()%><br> Last Name: <%= volunteer.author() %></a> </li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+    <p>There are no lists yet!</p>
+
+<% end %>
+
+
+<!-- ##Displaying all volunteers that were added -->
