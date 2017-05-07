@@ -1,30 +1,25 @@
-# VolunteeR Tracker
+# Volunteer Tracker
+### By Dan Jacob 5/5/17
 
-One Paragraph of project description goes here
+  Epicodus Project Week 3 || Database practice to keep keep track of volunteers and projects
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+## Description
+This application serves as practice in Ruby and SQL Database Relationships by building an internal website to track volunteers that are working on projects. Each project can have many volunteers, but a volunteer can only work on one project at a time.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
 ```
-Give examples
+To run this application, you must have postgres installed, Ruby, Sinatra, and the specific gems required listed in the Gemfile
 ```
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
+*In the termina change into the desktop, and clone this repository*
 
 ```
-Give the example
+git clone https://github.com/DanJacobCodes/anagrams_and_antigrams
 ```
-
-And repeat
+*
 
 ```
 until finished
@@ -44,44 +39,7 @@ Explain what these tests test and why
 Give an example
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
