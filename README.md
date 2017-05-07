@@ -9,36 +9,34 @@ This application serves as practice in Ruby and SQL Database Relationships by bu
 ### Prerequisites
 
 ```
-To run this application, you must have postgres installed, Ruby, Sinatra, and the specific gems required listed in the Gemfile
+To run this application, you must have postgres, Ruby, Sinatra, and the specific gems required listed in the Gemfile installed on your local device
 ```
 
 ### Installing
 
-*In the termina change into the desktop, and clone this repository*
+*Before beginning the clone/download process it is imperative to create a local Database using PSQL
+*In one tab of your terminal window type postgres
+*Open another tab in your terminal (Alt + T) and run psql
+*In the psql tab run, follow the procedure below
 
 ```
-git clone https://github.com/DanJacobCodes/anagrams_and_antigrams
-```
-*
+CREATE DATABASE volunteer_tracker;
+\c volunteer_tracker
+CREATE TABLE volunteers (id serial primary key, name varchar, project_id int);
+CREATE TABLE projects (id serial primary key, name varchar);
+CREATE DATABASE volunteer_tracker_test WITH TEMPLATE volunteer_tracker;
 
 ```
-until finished
-```
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+*In the terminal, open a new tab and change into the desktop, and clone this repository, after cloning/download is complete run bundle to download all gems*
 
 ```
-Give an example
-```
+cd desktop
+git clone https://github.com/DanJacobCodes/volunteer_tracker.git
+bundle
+ruby app.rb
 
+```
 
 ## License
 
