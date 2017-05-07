@@ -23,12 +23,9 @@ class Volunteer
   end
 
   def save
-    result = DB.exec("INSERT INTO volunteers (first_name, last_name, project_id) VALUES ('#{@first_name}', '#{@last_name}', #{@project_id}) RETURNING id;")
+      result = DB.exec("INSERT INTO volunteers (first_name, last_name, project_id) VALUES ('#{@first_name}', '#{@last_name}', #{@project_id}) RETURNING id;")
       @id = result.first().fetch("id").to_i()
-  end
-
-
-
+    end
 
   def ==(another_volunteer)
     (self.first_name() == another_volunteer.first_name()) && (self.id() == another_volunteer.id()) && (self.last_name() == another_volunteer.last_name()) && (self.project_id == another_volunteer.project_id())
