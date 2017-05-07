@@ -1,11 +1,10 @@
 <h1>Volunteer Details</h1>
 
-<p>
-  First Name: <%=@volunteer.first_name()  %>
-  <br>
-  Last Name: <%= @volunteer.last_name() %>
-</p>
+<div class="container">
+  <a href="/">Home</a>
+  <h5>Volunteer ID: <%= @volunteer.id() %></h5>
+  <h5>Volunteer Name: <%= @volunteer.name() %></h5>
+  <h5>Volunteer Project: <%= @volunteer.project %></h5>
 
-<a href="/volunteers/<%= @volunteer.id() %>/edit">Edit Volunteer Info</a>
-
-<!-- #Form for individual volunteer# -->
+<a href="/volunteers/<%= @volunteer.id() %>/edit" role="button" class="btn btn-danger">Edit</a>
+</div>

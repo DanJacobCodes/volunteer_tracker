@@ -1,10 +1,10 @@
 <hr>
-<% if @volunteers.any?() %>
-  <h1>Meet our volunteers!</h1>
+<% if @projects.any?() %>
+  <h1>Meet our projects!</h1>
 
   <ul>
-    <% @volunteers.each() do |volunteer| %>
-      <li><a href="/volunteer/<%= volunteer.id()%>">First Name: <%= volunteer.first_name()%><br> Last Name: <%= volunteer.last_name() %></a> </li>
+    <% @projects.each() do |project| %>
+      <li><a href="/project/<%= project.id()%>">Project Name: <%= project.name()%></li>
     <% end %>
   </ul>
 
@@ -16,4 +16,4 @@
 
 <a href="/">Return Home</a>
 
-<!-- ##Displaying all volunteers that were added -->
+<!-- ##Displaying all projects that were added -->
