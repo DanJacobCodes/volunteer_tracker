@@ -1,9 +1,8 @@
 class Volunteer
-  attr_accessor(:first_name, :last_name, :project_id, :id)
+  attr_accessor(:id, :name, :project_id)
 
   def initialize(attributes)
-    @first_name = attributes.fetch(:first_name)
-    @last_name = attributes.fetch(:last_name)
+    @name = attributes.fetch(:name)
     @project_id = attributes.fetch(:project_id)
     @id = attributes.fetch(:id)
   end
@@ -12,23 +11,22 @@ class Volunteer
     volunteers_in_database = DB.exec("SELECT * FROM volunteers;")
     all_volunteers = []
     volunteers_in_database.each() do |volunteer|
-      first_name = volunteer.fetch('first_name')
-      last_name = volunteer.fetch('last_name')
+      name = volunteer.fetch('name')
       project_id = volunteer.fetch('project_id').to_i()
       id = volunteer.fetch('id').to_i()
-      each_volunteer = Volunteer.new({:id => id, :first_name => first_name, :last_name => last_name, :project_id => project_id})
+      each_volunteer = Volunteer.new({:id => id, :name => name, :project_id => project_id})
       all_volunteers.push(each_volunteer)
     end
     all_volunteers
   end
 
   def save
-      result = DB.exec("INSERT INTO volunteers (first_name, last_name, project_id) VALUES ('#{@first_name}', '#{@last_name}', #{@project_id}) RETURNING id;")
+      result = DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', #{@project_id}) RETURNING id;")
       @id = result.first().fetch("id").to_i()
     end
 
   def ==(another_volunteer)
-    (self.first_name() == another_volunteer.first_name()) && (self.id() == another_volunteer.id()) && (self.last_name() == another_volunteer.last_name()) && (self.project_id == another_volunteer.project_id())
+    (self.name() == another_volunteer.name()) && (self.project_id == another_volunteer.project_id())
   end
 
 
@@ -42,11 +40,9 @@ class Volunteer
   end
 
   def update(attributes)
-    @first_name = attributes.fetch(:first_name)
-    @last_name = attributes.fetch(:last_name)
     @project_id = attributes.fetch(:project_id)
     @id = self.id()
-    DB.exec("UPDATE volunteers SET first_name = '#{@first_name}', last_name = '#{@last_name}', project_id = #{@project_id},  WHERE id = #{@id};")
+    DB.exec("UPDATE volunteers SET project_id = project_id = #{@project_id},  WHERE id = #{@id};")
   end
 
   def delete

@@ -45,6 +45,7 @@ class Project
 
   def delete
     DB.exec("DELETE FROM projects WHERE id = #{self.id};")
+    DB.exec("DELETE FROM volunteers WHERE project_id = #{self.id()};")
   end
 
   def volunteers
@@ -52,10 +53,9 @@ class Project
    project_volunteers = []
    volunteers_in_project.each() do |volunteer|
    id = volunteer.fetch('id').to_i()
-   first_name = volunteer.fetch('first_name')
-   last_name = volunteer.fetch('last_name')
+   name = volunteer.fetch('name')
    project_id = self.id().to_i()
-   project_volunteers.push(Volunteer.new({:id => id, :first_name => first_name, :last_name => last_name, :project_id => project_id}))
+   project_volunteers.push(Volunteer.new({:id => id, :name => name, :project_id => project_id}))
  end
  project_volunteers
   end
