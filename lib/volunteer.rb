@@ -21,9 +21,9 @@ class Volunteer
   end
 
   def save
-      result = DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', #{@project_id}) RETURNING id;")
-      @id = result.first().fetch("id").to_i()
-    end
+     result = DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', #{@project_id}) RETURNING id;")
+     @id = result.first().fetch('id').to_i()
+   end
 
   def ==(another_volunteer)
     (self.name() == another_volunteer.name()) && (self.project_id == another_volunteer.project_id())
@@ -33,16 +33,17 @@ class Volunteer
   def self.find(id)
     found_volunteer = nil
     Volunteer.all().each() do |volunteer|
-      if volunteer.id() == (id)
+      if volunteer.id() == id
         found_volunteer = volunteer
       end
+    end
     found_volunteer
   end
 
   def update(attributes)
     @project_id = attributes.fetch(:project_id)
     @id = self.id()
-    DB.exec("UPDATE volunteers SET project_id = project_id = #{@project_id},  WHERE id = #{@id};")
+    DB.exec("UPDATE volunteers SET project_id = #{@project_id},  WHERE id = #{@id};")
   end
 
   def delete
@@ -55,4 +56,3 @@ class Volunteer
     name = result.first().fetch('name')
      end
    end
- end
