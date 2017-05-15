@@ -1,19 +1,14 @@
-<hr>
 <% if @projects.any?() %>
-  <h1>Meet our projects!</h1>
+      <h4>All Projects: </h4>
+      <ul>
+      <% @projects.each() do |project| %>
+        <li><a href="/projects/<%= project.id() %>"><%= project.name() %></a></li>
+      <% end %>
+      </ul>
 
-  <ul>
-    <% @projects.each() do |project| %>
-      <li><a href="/project/<%= project.id()%>">Project Name: <%= project.name()%></li>
-    <% end %>
-  </ul>
+  <% else %>
+      <h2>No projects at this time</h2>
+  <% end %>
+</div>
 
-<% else %>
-
-    <p>There are no lists yet!</p>
-
-<% end %>
-
-<a href="/">Return Home</a>
-
-<!-- ##Displaying all projects that were added -->
+<a href="/">Home</a>

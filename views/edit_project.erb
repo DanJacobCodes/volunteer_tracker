@@ -1,21 +1,21 @@
 <div class="container">
   <h5>Project ID: <%= @project.id() %></h5>
-  <h5>Project Name: <%= @project.name() %></h5>
+  <h5>Name: <%= @project.name() %></h5>
 
   <form action="/projects/<%= @project.id() %>" method="post">
     <input name="_method" type="hidden" value="patch">
     <div class="form-group">
-      <label for="edit_project_name"><b>Project Name: </b></label>
-      <input id="edit_project_name" name="edit_project_name" type="text"  class="form-control">
+      <label for="name"><b>New Name: </b></label>
+      <input id="name" name="name" type="text"  class="form-control">
     </div>
-    <button type="submit" class="btn btn-success">Update</button>
+    <button type="submit" class="btn btn-primary">Update</button>
   </form>
-
+<br>
   <form action="/projects/<%= @project.id() %>" method="post">
     <input name="_method" type="hidden" value="delete">
-    <button type="submit" class="btn btn-danger mt-3">Delete</button>
+    <button type="submit" class="btn btn-warning">Delete</button>
     </div>
   </form>
-
+<a href="/">Home</a>
 
 </div>

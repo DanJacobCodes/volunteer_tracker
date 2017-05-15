@@ -1,18 +1,16 @@
-<hr>
-<% if @volunteers.any?() %>
-  <h1>Meet our volunteer(s)!</h1>
+<h1>View volunteers</h1>
+<a href="/">Home</a>
 
-  <ul>
-    <% @volunteers.each() do |volunteer| %>
-      <li><a href="/volunteer/<%= volunteer.id()%>">First Name: <%= volunteer.first_name()%><br> Last Name: <%= volunteer.last_name() %></a> </li>
-    <% end %>
-  </ul>
+<div class="container">
 
-<% else %>
-
-    <p>There are no lists yet!</p>
-
-<% end %>
-
-
-<!-- ##Displaying all volunteers that were added -->
+  <% if @volunteers.any?() %>
+      <h3>Volunteers: </h3>
+      <ul>
+      <% @volunteers.each() do |volunteer| %>
+        <li><a href="/volunteers/<%= volunteer.id() %>"><%= volunteer.name() %></a></li>
+      <% end %>
+      </ul>
+  <% else %>
+      <h2>No volunteers at this time</h2>
+  <% end %>
+</div>

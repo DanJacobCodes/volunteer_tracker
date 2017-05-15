@@ -1,15 +1,27 @@
-<h1>Tell us about you</h1>
-<hr>
-<div class="container">
-  <form action="/volunteers" method="post">
-    <label for="first_name">First Name: </label>
-    <input id="first_name" name="first_name" type="text">
-    <label for="last_name">Last Name: </label>
-    <input id="last_name" name="last_name" type="text">
-    <button type="submit">Sign Up!</button>
-  </form>
+<h1>Sign up today to become a volunteer!</h1>
+<a href="/">Home</a>
+
+<form action="/volunteers" method="post">
+
+  <% if @projects.any?() %>
+   <div class="form-group">
+     <label for="project_id">Choose a project</label>
+     <select  name="project_id" type="text">
+       <% @projects.each do |project| %>
+      <option value="<%= project.id()%>"> <%= project.name() %> </option> %> </option>
+       <% end %>
+     </select>
+    </div>
+    <% else  %>
+  <select id='project_id' name='project_id' type='text'>
+    <option value="0"> No projects at this time </option>
+  </select>
+<% end  %>
+
+
+<div class="form-group">
+  <label for ="name">Enter your name:</label>
+  <input type="text" name="name" class="form-control">
 </div>
-
-<a href="/">Back to Home</a>
-
-<!-- ##Form to begin volunteer sign up -->
+  <button type="submit" name="button">Submit</button>
+</form>

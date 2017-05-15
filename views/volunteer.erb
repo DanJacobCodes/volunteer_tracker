@@ -1,10 +1,9 @@
-<h1>Volunteer Details</h1>
-
 <div class="container">
-  <a href="/">Home</a>
-  <h5>Volunteer ID: <%= @volunteer.id() %></h5>
-  <h5>Volunteer Name: <%= @volunteer.name() %></h5>
-  <h5>Volunteer Project: <%= @volunteer.project %></h5>
+  <h4>Volunteer ID: <%= @volunteer.id() %></h4>
+  <h4>Name: <%= @volunteer.name() %></h4>
+  <h4>Project: <%= @volunteer.project_id %></h4>
 
-<a href="/volunteers/<%= @volunteer.id() %>/edit" role="button" class="btn btn-danger">Edit</a>
+<a href="/volunteers/<%= @volunteer.id() %>/edit" role="button" class="btn btn-primary">Edit Info</a>
 </div>
+
+<a href="/">Home</a>

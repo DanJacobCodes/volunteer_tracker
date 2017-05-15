@@ -20,7 +20,7 @@ This application serves as practice in Ruby and SQL Database Relationships by bu
 ```
 CREATE DATABASE volunteer_tracker;
 \c volunteer_tracker
-CREATE TABLE volunteers (id serial primary key, first_name varchar, last_name varchar, project_id int);
+CREATE TABLE volunteers (id serial primary key, name varchar, project_id int);
 CREATE TABLE projects (id serial primary key, name varchar);
 CREATE DATABASE volunteer_tracker_test WITH TEMPLATE volunteer_tracker;
 

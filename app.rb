@@ -9,11 +9,21 @@ also_reload('lib/**/*.rb')
 DB = PG.connect({:dbname => "volunteer_tracker"})
 
 get('/') do
-erb(:index)
+  erb(:index)
 end
 
 get('/volunteers/new') do
+  @projects = Project.all()
   erb(:volunteers_form)
+end
+
+post('/volunteers') do
+  name = params.fetch('name')
+  project_id = params.fetch('project_id')
+  new_volunteer = Volunteer.new({:id => nil, :name => name, :project_id => project_id})
+  new_volunteer.save()
+  @volunteers = Volunteer.all()
+  erb(:volunteers)
 end
 
 get('/volunteers') do
@@ -21,20 +31,23 @@ get('/volunteers') do
   erb(:volunteers)
 end
 
-get('/volunteers/:id/edit') do
-@volunteers = Volunteer.find(params.fetch("id").to_i())
-erb(:volunteers_edit_form)
-end
-
-patch('/volunteers/:id')do
-  first_name = params.fetch('first_name')
-  last_name = params.fetch('last_name')
+get('/volunteers/:id') do
   @volunteer = Volunteer.find(params.fetch('id').to_i())
-  @volunteer.update({:first_name=>first_name, :last_name=>last_name})
-  @volunteers = Volunteer.all()
-  erb(:volunteers)
+  erb(:volunteer)
 end
 
+get('/volunteers/:id/edit') do
+  @volunteer = Volunteer.find(params.fetch('id').to_i())
+  @projects = Project.all()
+  erb(:edit_volunteer)
+end
+
+patch('/volunteers/:id') do
+  @volunteer = Volunteer.find(params.fetch('id').to_i())
+  project_id = params.fetch('project_id').to_i()
+  @volunteer.update({:project_id => project_id})
+  erb(:volunteer)
+end
 delete('/volunteers/:id') do
   @volunteer = Volunteer.find(params.fetch('id').to_i())
   @volunteer.delete()
@@ -42,25 +55,11 @@ delete('/volunteers/:id') do
   erb(:volunteers)
 end
 
-post('/volunteers') do
-  first_name = params.fetch('first_name')
-  last_name = params.fetch('last_name')
-  @volunteer = Volunteer.new({:first_name=>first_name, :last_name=>last_name})
-  @volunteer.save()
-  erb(:success)
-end
-
-get('/volunteers/:id') do
-  @book = Volunteer.find(params.fetch("id").to_i())
-  erb(:volunteer)
-end
-
-## Beginning of Project routing##
-get('/projects/new') do
+get('/projects/new')do
   erb(:project_form)
 end
 
-post('/projects') do
+post('/projects')do
   name = params.fetch('name')
   new_project = Project.new({:id => nil, :name => name})
   new_project.save()
@@ -68,14 +67,13 @@ post('/projects') do
   erb(:projects)
 end
 
-
-get('/projects') do
+get('/projects')do
   @projects = Project.all()
   erb(:projects)
 end
 
-get('/projects/:id') do
-  @project = Project.find(params.fetch("id").to_i())
+get('/projects/:id')do
+  @project = Project.find(params.fetch('id').to_i())
   erb(:project)
 end
 
@@ -91,7 +89,7 @@ end
 
 get('/projects/:id/edit') do
   @project = Project.find(params.fetch('id').to_i())
-  erb(:project_edit_form)
+  erb(:edit_project)
 end
 
 patch('/projects/:id') do
@@ -102,6 +100,13 @@ patch('/projects/:id') do
 end
 
 delete('/projects/:id') do
+  @project = Project.find(params.fetch('id').to_i())
+  @project.delete()
+  @projects = Project.all()
+  erb(:projects)
+end
+
+post('/projects/:id') do
   @project = Project.find(params.fetch('id').to_i())
   @project.delete()
   @projects = Project.all()

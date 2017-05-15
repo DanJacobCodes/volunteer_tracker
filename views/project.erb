@@ -1,31 +1,27 @@
-<div class="container">
-  <a href="/">Home</a>
-  <h5>Project: <%= @project.id()%></h5>
-  <h1><%= @project.name() %></h1>
+<a href="/">Home</a>
+<h2>Project: <%=@project.id()%></h2>
+<h4><%= @project.name() %></h4>
 
-  <% if @project.volunteers().any?  %>
-    <ul>
-      <% @project.volunteers().each() do |volunteer| %>
-        <li><a href="/volunteers/<%= volunteer.id() %>"><%= volunteer.first_name()%></a></li>
-      <% end  %>
-    </ul>
-  <% else %>
-    <p>There are no volunteers for this project!</p>
-  <% end  %>
+<% if @project.volunteers().any?  %>
+  <ul>
+    <% @project.volunteers().each() do |volunteer| %>
+      <li><a href="/volunteers/<%= volunteer.id() %>"><%= volunteer.name()%></a></li>
+    <% end  %>
+  </ul>
+<% else %>
+  <p>No volunteers for the this project</p>
+<% end  %>
 
-
-  <a href="/projects/<%= @project.id() %>/edit" role="button" class="btn btn-warning">Edit</a>
-
-  <!-- Add Volunteers -->
-  <button class="btn btn-success add-volunteer">Add Volunteer</button>
-
-    <form action="/project_volunteers" method="post">
-      <h3>Add Volunteer for <%= @project.name()%></h3>
-      <div class="form-group">
-        <input id="project_id" name="project_id" type="hidden" value="<%= @project.id() %>">
-        <label for="name">Name: </label>
-        <input id="name" name="name" type="text"  class="form-control">
-      </div>
-      <button type="submit" class="btn btn-primary">Add</button>
-    </form>
-  </div>
+<a href="/projects/<%= @project.id() %>/edit" role="button" class="btn btn-primary">Edit Project</a>
+<br>
+<br>
+  <form action="/project_volunteers" method="post">
+     <h4>Add Volunteer for <%= @project.name() %></h4>
+     <div class="form-group">
+       <input id="project_id" name="project_id" type="hidden" value="<%= @project.id() %>">
+       <label for="name">Name: </label>
+       <input id="name" name="name" type="text"  class="form-control">
+     </div>
+     <button type="submit" class="btn btn-primary">Add</button>
+   </form>
+</div>
